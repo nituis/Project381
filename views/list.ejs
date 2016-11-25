@@ -1,0 +1,21 @@
+<html>
+<head>
+	<title>Project 381 - Powered by Chan Pui Yu & Fu Chi Hang</title>
+</head>
+<body>
+	<h1>Restaurants</h1>
+	<p>
+		<a href="/logout">Logout</a>
+		<a href="/">Home</a>
+	</p>
+	<h2>User: <%= session.getParameter("username") %></H1>
+	<h2>Showing <%= c.length %> Restaurants</H1>
+	
+	
+	<ol>
+	<% c.forEach(function(cafe) { %>
+		<li><a href="/api/read/<%= cafe.criteria%>/<%= cafe.details%>">.</a></li>
+	<% });                        %>
+	</ol>
+</body>
+</html>
