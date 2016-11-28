@@ -1,0 +1,17 @@
+<HTML>
+<BODY>
+<head>
+ <title><%= c.name %></title>
+</head>
+<% if (c.photo != null) { %>
+<img src="data:<%= c.mimetype %>;base64,<%= c.photo %>">
+<% } %>
+<p>Borough: <%= c.borough %></p>
+<p>cuisine: <%= c.cuisine %></p>
+<p>street: <%= c.street %></p>
+<p>building: <%= c.building %></p>
+<p>coord: <%= c.coord %></p>
+<br>
+<a href=/add2cart?id=<%= c.id %>>add to shopping cart</a>
+</BODY>
+</HTML>
