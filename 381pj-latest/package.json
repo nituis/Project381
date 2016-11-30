@@ -1,0 +1,19 @@
+{
+    "name": "381",
+    "description": "COMPS381F - project",
+    "version": "0.0.1",
+    "dependencies": {
+        "mongoose": "*",
+        "express": "*",
+        "ejs": "*",
+        "mongodb": "*",
+        "cookie-session": "*",
+        "body-parser": "latest",
+        "express-fileupload": "latest"
+
+    },
+    "scripts": {
+        "start": "node server.js"
+    },
+    "engine": "*"
+}
