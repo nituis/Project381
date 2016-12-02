@@ -1,3 +1,5 @@
+var cfenv = require('cfenv');
+var appEnv = cfenv.getAppEnv();
 var express = require('express');
 var app = express();
 var mongourl = 'mongodb://lazylook:s20071038@ds159767.mlab.com:59767/comps381f';
@@ -227,7 +229,6 @@ app.get('/display', function (req, res) {
     }
 });
 
-
  app.get("/gmap.ejs", function(req,res) {
  MongoClient.connect(mongourl, function(err, db) {
  assert.equal(err,null);
@@ -249,6 +250,6 @@ function display(db, id, callback) {
     });
 };
 
-
-
-app.listen(process.env.PORT || 8099);
+app.listen(appEnv.port, '27017', function() {
+  console.log("server starting on " + appEnv.url);
+});
