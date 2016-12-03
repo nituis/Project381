@@ -4,18 +4,24 @@
 </head>
 <body>
 	<h1>Restaurants</h1>
+	<h2>User: <%= username %></h2>
 	<p>
-		<a href="/logout">Logout</a>
+		<a href="/api/logout">Logout</a>
 		<a href="/">Home</a>
 	</p>
-	<h2>User: <%= session.getParameter("username") %></H1>
+	<!---->
+	
 	<h2>Showing <%= c.length %> Restaurants</H1>
+	<p>
+		<a href="/api/create">New Restaurant</a>
+		<%= authorRights%>
+	</p>
 	
 	
 	<ol>
-	<% c.forEach(function(cafe) { %>
-		<li><a href="/api/read/<%= cafe.criteria%>/<%= cafe.details%>">.</a></li>
-	<% });                        %>
+	<!--
+	< c.forEach(function(cafe) { %>-->
+		<li><a href="/api/read/<%= %>/<%= %>">.</a></li>
 	</ol>
 </body>
 </html>

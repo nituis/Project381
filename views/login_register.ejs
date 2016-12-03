@@ -1,13 +1,21 @@
 <html>
 <head>
-<title>Project 381 - Powered by Chan Pui Yu & Fu Chi Hang</title>
+	<title>Project 381 - Powered by Chan Pui Yu & Fu Chi Hang</title>
 </head>
 <body>
 	<h1>Restaurants</h1>
-	<form action="/login" method="post">
-		Username: <input type="text" name="name" value="<%= username%>"><br>
-		Password: <input type="password" name="password" value="<%= pw%>"><br>
-	<input type="submit" value="Login">
+	<h2>User: Guest</h2>
+	<p>
+		<a href="<%= notPath %>"><%= notName%></a>
+		<a href="/">Home</a>
+	</p>
+	<!---->
+	
+	<h2><%= title %></h2>
+	<form action="<%= path %>" method="post">
+		Username: <input type="text" name="name"><br>
+		Password: <input type="password" name="password"><br>
+	<input type="submit" value="<%= title %>">
 	</form>
 </body>
 </html>

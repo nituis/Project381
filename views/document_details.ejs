@@ -1,1 +1,30 @@
- 
+<html>
+<head>
+	<title>Project 381 - Powered by Chan Pui Yu & Fu Chi Hang</title>
+</head>
+<body>
+	<h1>Restaurants</h1>
+	<h2>User: <%= username %></h2>
+	<p>
+		<a href="/api/logout">Logout</a>
+		<a href="/">Home</a>
+	</p>
+	<!---->
+	
+	<h2>Creating new restaurant</h2>
+	<!--<form action="http://projdemo.mybluemix.net/create" method="post" enctype="multipart/form-data">-->
+	<form action="/api/create" method="post" enctype="multipart/form-data">
+	  Name: <input name="name" type="text" required="">
+	  <br/>Cuisine: <input name="cuisine" type="text">
+	  <br/>Address: 
+	  <br/>Street: <input name="street" type="text">
+	  <br/>Building: <input name="building" type="text">
+	  <br/>Zipcode: <input name="zipcode" type="text">
+	  <br/>GPS Longitude: <input name="lon" type="text">
+	  <br/>GPS Latitude: <input name="lat" type="text">
+	  <br/>Photo: <input name="photo" type="file">
+	  <br/><button type="submit"> Create </button>
+	</form>
+
+</body>
+</html>

@@ -1,0 +1,29 @@
+<html>
+<head>
+  <title>Restaurant</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+</head>
+<body>
+<header class="w3-container w3-teal">
+		<p>User: <%=userid%>  <a href="/api/logout">Logout</a>
+		  <a href="/">Home</a></p>
+		  
+		  <p><h1>Rate restaurant</h1></p>
+		</header>
+<div class="w3-container">
+<form action="/api/rate?_id=<%= _id%>" method="post">
+<p>
+  <input name="rate"class="w3-input" type="text">
+  <label class="w3-label w3-validate">Rate</label></p>
+  <p>
+    <input name ="submit" type ="submit"class="w3-btn w3-section w3-teal w3-ripple"></p>
+
+</form>
+</div>
+<br>
+
+
+<p>
+</body>
+</html>

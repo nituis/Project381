@@ -1,0 +1,58 @@
+<html>
+<head>
+  <title>Restaurant</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+</head>
+<body>
+<header class="w3-container w3-teal">
+		<p>User: <%=userid%>  <a href="/api/logout">Logout</a>
+		  <a href="/">Home</a></p>
+		  
+		  <p><h1><%=c.name%></h1></p>
+		</header>
+<div class="w3-container">
+  <% if (c.data != "") { %>
+  <p>
+ <img src="data: <%=c.mimetype%>;base64,<%=c.data%>" alt="Restaurant" style="width:304px;height:228px;">
+<% } %>
+<br>
+<label class="w3-label w3-validate">Name: </label><%=c.name%><br>
+<label class="w3-label w3-validate">Borough: </label><%=c.borough%><br>
+<label class="w3-label w3-validate">Cuisine: </label><%= c.cuisine%><br>
+<label class="w3-label w3-validate">Street: </label><%=c.address.street%><br>
+<label class="w3-label w3-validate">Building: </label><%=c.address.building%><br>
+<label class="w3-label w3-validate">Zipcode: </label><%=c.address.zipcode%><br>
+
+<label class="w3-label w3-validate">GPS:</label>[<%=c.address.coord[0]%>,<%=c.address.coord[1]%>]   
+<% if (c.address.coord[0] != "" && c.address.coord[1] != "") { %>      
+<button class="w3-btn"><a href="/api/gmap?_id=<%=c._id%>" style="text-decoration: none">google map</a></button>
+<% } %>
+
+<br>
+
+<label class="w3-label w3-validate">Rate:</label>
+<ol>
+<% if (c.rate) { %>
+<% for (var i=0; i<c.rate.length;i++){ %>
+<li><%= c.rate[i].value%> (<%= c.rate[i].userid%>)</li>
+<% } %>
+<% } %>
+</ol>
+<label class="w3-label w3-validate">Author: <%= c.userid%></label>
+</div>
+<div class="w3-container">
+<a href="/api/rate?_id=<%=c._id%>" style="text-decoration: none">
+    <button class="w3-btn w3-section w3-teal w3-ripple">Rate</button>
+</a>
+<a href="/api/edit?_id=<%=c._id%>" style="text-decoration: none">
+  <button class="w3-btn w3-section w3-teal w3-ripple">Edit</button>
+</a>
+<a href="/api/remove?_id=<%=c._id%>" style="text-decoration: none">
+  <button class="w3-btn w3-section w3-teal w3-ripple">Delete</button>
+</a>
+</div>
+
+<p>
+</body>
+</html>
