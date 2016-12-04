@@ -265,7 +265,7 @@ app.post('/api/create', function (req, res) {
 				});
 				return;
 			} 
-			fn.create(db, req.files.bfile, req.body, "demo", function (result) {
+			fn.create(db, req.files.bfile, req.body, req.session.userid, function (result) {
 				db.close();
 				if (result) {
 					res.json({status: "ok", _id: result.insertedId});
