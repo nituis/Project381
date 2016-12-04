@@ -155,7 +155,7 @@ app.get('/api/read/:criteria/:detail', function (req, res){
 	//console.log("in /api/read/:criteria/:detail");
 	var criteria = "None";
 	
-	//if (req.session.userid && req.params.detail && req.params.criteria){
+	if (req.session.userid && req.params.detail && req.params.criteria){
 		var detail = req.params.detail;
 		var criteria = req.params.criteria;
 		var doc;
