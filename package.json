@@ -1,19 +1,16 @@
 {
-    "name": "381",
-    "description": "COMPS381F - project",
+    "name": "server",
+    "description": "NodeJS Session",
+    "author": "Chan Pui Yu",
     "version": "0.0.1",
     "dependencies": {
-        "mongoose": "*",
-        "express": "*",
-        "ejs": "*",
-        "mongodb": "*",
-        "cookie-session": "*",
-        "body-parser": "latest",
-        "express-fileupload": "latest"
-
+      "express": "*",
+      "ejs": "*",
+	  "mongodb": "*",
+		  "body-parser": "*",
+		  "cookie-session": "*",
+		  "express-fileupload": "*"
     },
-    "scripts": {
-        "start": "node server.js"
-    },
-    "engine": "*"
+    "engine": "node >= 0.10.0",
+    "scripts": {"start": "node server"}
 }
