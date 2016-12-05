@@ -28,7 +28,7 @@ create: function(db, req, callback) {
 	var mt = "";
 	var coord = ["", ""];
 
-	if (req.files) {
+	if (req.files.data) {
 	data = new Buffer(req.files.data).toString('base64');
 	if (req.files.mimetype == "image/jpeg"
 ||data.mimetype == "image/bmp"
