@@ -22,18 +22,29 @@ checkduplicate: function(db, userid, callback) {
 },
 
 
-create: function(db, bfile, restaurant, userid, callback) {
-    console.log(bfile);
+create: function(db, req, callback) {
+    //console.log(bfile);
 	var data = "";
 	var mt = "";
 	var coord = ["", ""];
 
-	if (bfile){
-		data = new Buffer(bfile.data).toString('base64');
+	if (req.files) {
+	data = new Buffer(req.files.data).toString('base64');
+	if (req.files.mimetype == "image/jpeg"
+||data.mimetype == "image/bmp"
+||data.mimetype == "image/x-cmx"
+||data.mimetype == "image/cis-cod"
+||data.mimetype == "image/gif"
+||data.mimetype == "image/x-icon"
+||data.mimetype == "image/ief"
+||data.mimetype == "image/pipeg"
+||data.mimetype == "image/x-portable-bitmap"
+||data.mimetype == "image/x-portable-graymap"){
 		mt = data.mimetype;
 	} 
-	if (restaurant.lon && restaurant.lat){
-		coord = [restaurant.lon, restaurant.lat];
+	}
+	if (req.body.lon && req.body.lat){
+		coord = [req.body.lon, req.body.lat];
 	} else {
 		coord = ["", ""];
 	}
@@ -42,15 +53,15 @@ create: function(db, bfile, restaurant, userid, callback) {
 
     db.collection('restaurant').insertOne({
 			"address": {
-				"street": restaurant.street,
-				"zipcode": restaurant.zipcode,
-				"building": restaurant.building,
+				"street": req.body.street,
+				"zipcode": req.body.zipcode,
+				"building": req.body.building,
 				"coord": coord
 			},
-			"borough": restaurant.borough,
-			"cuisine": restaurant.cuisine,
-			"name": restaurant.name,
-			"userid": userid,
+			"borough": req.body.borough,
+			"cuisine": req.body.cuisine,
+			"name": req.body.name,
+			"userid": req.session.userid,
 			"restaurant_id": null,
 			"data": data,
 			"mimetype": mt,
@@ -105,13 +116,29 @@ remove: function(db, userid, restid) {
 edit: function(db, bfile, restaurant, userid, restid) {
     console.log("In edit()", bfile);
 	var doc;
+	var data = new Buffer(bfile.data).toString('base64');
 	var coord = ["", ""];
-	
+	var mt = "";
 	if (restaurant.lon && restaurant.lat){
 		coord = [restaurant.lon, restaurant.lat];
 	} 
-
-	if (bfile.name != ""){
+	if (data.mimetype == "image/jpeg"
+||data.mimetype == "image/bmp"
+||data.mimetype == "image/x-cmx"
+||data.mimetype == "image/cis-cod"
+||data.mimetype == "image/gif"
+||data.mimetype == "image/x-icon"
+||data.mimetype == "image/ief"
+||data.mimetype == "image/pipeg"
+||data.mimetype == "image/x-portable-bitmap"
+||data.mimetype == "image/x-portable-graymap"){
+			
+			mt = data.mimetype;
+		
+	} else {
+		data = "";
+	}
+	if (bfile.name != "" && data != "" && mt != ""){
 		//console.log("BFILE!!!!!!!!!!!!!!", bfile);
 		doc = {
 		"address": {
@@ -152,7 +179,7 @@ edit: function(db, bfile, restaurant, userid, restid) {
 		"_id": ObjectId(restid)		
 	},{$set: doc}, function (err, result) {
         assert.equal(err,null);
-		console.log("in edit(): found")
+		console.log("in edit(): found", err, result)
         if (err) {
             //result = err;
             console.log("insertOne error: " + JSON.stringify(err));

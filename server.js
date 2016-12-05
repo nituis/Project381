@@ -155,7 +155,7 @@ app.get('/api/read/:criteria/:detail', function (req, res){
 	//console.log("in /api/read/:criteria/:detail");
 	var criteria = "None";
 	
-	if (req.session.userid && req.params.detail && req.params.criteria){
+	//if (req.session.userid && req.params.detail && req.params.criteria){
 		var detail = req.params.detail;
 		var criteria = req.params.criteria;
 		var doc;
@@ -180,9 +180,9 @@ app.get('/api/read/:criteria/:detail', function (req, res){
 				}
 			})
 		});
- 	} else {
-		res.redirect("/");
-	}  
+ 	//} else {
+	//	res.redirect("/");
+	//}  
 });
 
 /////////////////////////////////////////////////      Read details
@@ -254,7 +254,7 @@ app.get('/api/create', function (req, res) {
 });
 
 app.post('/api/create', function (req, res) {
-	if (req.session.userid){
+	//if (req.session.userid){
 		MongoClient.connect(mongourl, function (err, db) {
 			assert.equal(err, null);
 			console.log('Connected to MongoDB\n');
@@ -265,7 +265,7 @@ app.post('/api/create', function (req, res) {
 				});
 				return;
 			} 
-			fn.create(db, req.files.bfile, req.body, req.session.userid, function (result) {
+			fn.create(db, req, function (result) {
 				db.close();
 				if (result) {
 					res.json({status: "ok", _id: result.insertedId});
@@ -278,9 +278,9 @@ app.post('/api/create', function (req, res) {
 				}
 			});
 		});
-	} else {
-		res.redirect("/");
-	} 
+	//} else {
+	//	res.redirect("/");
+	//} 
 });
 
 
@@ -289,15 +289,17 @@ app.get('/api/edit', function (req, res) {
 	if (req.session.userid && req.query._id){
 		MongoClient.connect(mongourl, function (err, db) {
 			assert.equal(err, null);
-			console.log('Connected to MongoDB\n');
+			
 			db.collection('restaurant').findOne(
 			{userid: req.session.userid, _id:ObjectId(req.query._id)}
 			, function (err, result){
+	console.log('HIHIHIHIHIHIHIHIHIHI\n', err, result);
 				if (result){
 					//res.sendFile(__dirname + '/public/createRestaurant.html');
 					res.render('edit.ejs', {userid: req.session.userid, c:result});
 				} else {
-					res.redirect('/api/display?_id='+req.query._id);
+					res.render('output.ejs', {userid: req.session.userid, message:"edit failed"});
+					//res.redirect('/api/display?_id='+req.query._id);
 				}
 				//console.log(req.query._id, result);
 			});
