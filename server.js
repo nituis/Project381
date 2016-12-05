@@ -1,5 +1,6 @@
 //SFH : rate function -> RESTful
-
+var cfenv = require('cfenv');
+var appEnv = cfenv.getAppEnv();
 var express = require('express');
 var app = express();
 var mongourl = 'mongodb://lazylook:s20071038@ds159767.mlab.com:59767/comps381f';
@@ -374,5 +375,7 @@ app.get('/api/remove', function (req, res) {
 });
 
 
-app.listen(process.env.PORT || 8099);
-console.log("Server is working");
+
+app.listen(appEnv.port, function() {
+  console.log("server starting on " + appEnv.url);
+});
