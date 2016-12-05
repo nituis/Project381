@@ -9,7 +9,8 @@
 	  "mongodb": "*",
 		  "body-parser": "*",
 		  "cookie-session": "*",
-		  "express-fileupload": "*"
+		  "express-fileupload": "*",
+		"cfenv":"1.0.x"
     },
     "engine": "node >= 0.10.0",
     "scripts": {"start": "node server"}
